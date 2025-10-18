@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Semáforo</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <button id="desligar" onclick="desligar()">Desligar</button>
+    <div id="semaforo">
+        <img src="img/desligado.png" alt="Desligado" id="desligado">
+        <button id="ligar" onclick="ligar()">Ligar</button>
+        <div id="buttons">
+            <button id="vermelho" onclick="redBtn()">Vermelho</button>
+            <button id="amarelo" onclick="yellowBtn()">Amarelo</button>
+            <button id="verde" onclick="greenBtn()">Verde</button>
+        </div>
+        <script>
+            let animating = false
+
+            function setButtonsDisabled(state) {
+                const buttons = document.getElementById("buttons")
+                const desligarBtn = document.getElementById("desligar")
+                if (state) {
+                    buttons.classList.add("disabled")
+                    desligarBtn.classList.add("disabled")
+                } else {
+                    buttons.classList.remove("disabled")
+                    desligarBtn.classList.remove("disabled")
+                }
+            }
+
+            function ligar() {
+                var img = document.getElementById('desligado')
+                var buttons = document.getElementById('buttons')
+                var ligarBtn = document.getElementById('ligar')
+                var desligarBtn = document.getElementById('desligar')
+
+                if (img.src.includes("desligado.png")) {
+                    img.src="img/vermelho.png"
+                    ligarBtn.style.display = 'none'
+                    buttons.style.display = 'flex'
+                    // força o próximo frame para que a transição ocorra
+                    requestAnimationFrame(() => buttons.classList.add('visible'));
+                    requestAnimationFrame(() => desligarBtn.classList.add('visible'));
+                }
+            }
+
+            function desligar() {
+                const desligarBtn = document.getElementById('desligar')
+                var buttons = document.getElementById('buttons')
+                var img = document.getElementById('desligado')
+                const ligarBtn = document.getElementById('ligar')
+
+                desligarBtn.classList.remove('visible')
+                buttons.style.display = 'none'
+                ligarBtn.style.display = 'inline-block'
+                img.src="img/desligado.png"
+            }
+
+            function redBtn() {
+                if (animating) return
+                var img = document.getElementById("desligado")
+
+                if (img.src.includes("verde.png")) {
+                    animating = true
+                    setButtonsDisabled(true)
+
+                    img.src="img/amarelo.png"
+                    // espera (ex.: 1500ms) antes de ir para vermelho
+                    setTimeout(() => {
+                        img.src="img/vermelho.png"
+                        animating = false
+                        setButtonsDisabled(false)
+                    }, 1500) // 1500 é o tempo para a função executar
+                    return
+                }
+
+                if (!img.src.includes("vermelho.png")) {
+                    img.src="img/vermelho.png"
+                }
+            }
+
+            function yellowBtn() {
+                var img = document.getElementById("desligado")
+
+                if (!img.src.includes("amarelo.png")) {
+                    img.src="img/amarelo.png"
+                } else {
+                    return
+                }
+            }
+
+            function greenBtn() {
+                var img = document.getElementById("desligado")
+
+                if (!img.src.includes("verde.png")) {
+                    img.src="img/verde.png"
+                } else {
+                    return
+                }
+            }
+        </script>
+    </div>
+</body> 
+</html>

@@ -1,0 +1,144 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Helvetica;
+}
+
+button {
+    font-family: Helvetica;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+#semaforo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+    gap: 200px;
+    position: relative;
+}
+
+#semaforo img {
+    width: 300px;
+    height: auto;
+}
+
+#ligar {
+    display: inline-block;
+    background-color: #01004d;
+    color: #fff;
+    height: 200px;
+    width: 200px;
+    font-size: 40px;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+#ligar:hover {
+    transform: scale(1.05);
+    background-color: #020077;
+}
+
+#buttons {
+    display: none;
+    flex-direction: column;
+    gap: 25px;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 300ms ease, transform 300ms ease;
+    pointer-events: none;
+}
+
+#buttons.visible.disabled {
+    pointer-events: none;
+    opacity: 0.7;
+    filter: grayscale(20%);
+}
+
+#buttons.visible {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+#verde {
+    background-color: #11ca00;
+    color: #fff;
+    height: 200px;
+    width: 200px;
+    font-size: 35px;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+#amarelo, #vermelho {
+    color: #fff;
+    height: 200px;
+    width: 200px;
+    font-size: 30px;
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+#verde:hover, #amarelo:hover, #vermelho:hover {
+    transform: scale(1.05);
+}
+
+#verde:hover {
+    background-color: #13df00;
+}
+
+#amarelo:hover {
+    background-color: #ddec00;
+}
+
+#vermelho:hover {
+    background-color: #ff150c;
+}
+
+#amarelo {
+    background-color: #cad800;
+}
+
+#vermelho {
+    background-color: #df0700;
+}
+
+#desligar {
+    display: block;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 90px;
+    height: 90px;
+    opacity: 0;
+    transform: scale(0.95);
+    border-radius: 50%;
+    border: 1px solid black;
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #b1b1b1;
+    color: #fff;
+    transition: opacity 300ms ease, transform 300ms ease;
+    transition: 0.4s;
+    pointer-events: none;
+}
+
+#desligar.visible:hover {
+    transform: scale(1.05);
+}
+
+#desligar.visible {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+#desligar.visible.disabled {
+    pointer-events: none;
+    opacity: 0.7;
+    filter: grayscale(20%);
+}  
